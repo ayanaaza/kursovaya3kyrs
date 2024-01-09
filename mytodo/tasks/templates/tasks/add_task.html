@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Task</title>
+</head>
+<body>
+    <h2>Добавление записи</h2>
+    <form method="post" action="{% url 'add_task' %}">
+        {% csrf_token %}
+        <label for="title">Новая запись:</label>
+        <input type="text" name="title" id="title" required>
+
+        <button type="submit">Добавить</button>
+    </form>
+    <a href="{% url 'task_list' %}">Вернуться назад</a>
+</body>
+</html>

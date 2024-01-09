@@ -1,0 +1,32 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo List</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'tasks/styles.css' %}">
+</head>
+<body>
+    <h1>ToDo List</h1>
+    <ul>
+        {% for task in tasks %}
+            <li>
+                {% if task.completed %}
+                    <del>{{ task.title }}</del>
+                {% else %}
+                    {{ task.title }}
+                {% endif %}
+                <form method="post" action="{% url 'toggle_task' task.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Выполнено</button>
+                </form>
+                <form method="post" action="{% url 'delete_task' task.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Удалить</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'add_task' %}">Добавить</a>
+</body>
+</html>
